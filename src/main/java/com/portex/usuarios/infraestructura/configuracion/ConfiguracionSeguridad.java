@@ -33,6 +33,7 @@ public class ConfiguracionSeguridad {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/usuarios", "/usuarios/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtCustomFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
