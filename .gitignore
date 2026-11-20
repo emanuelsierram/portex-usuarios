@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Local Spring configuration and environment files
+.env
+.env.*
+!.env.example
+application*.properties
+!application.example.properties
+
+# Runtime and generated files
+*.log
+*.class
+out/
+
+# Local databases, backups and certificates
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.bak
+*.pem
+*.key
+*.p12
+*.jks
+*.crt
+*.cer
+
+# OS files
+.DS_Store
+Thumbs.db
