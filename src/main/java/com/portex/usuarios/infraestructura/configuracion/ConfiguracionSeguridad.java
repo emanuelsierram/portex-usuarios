@@ -34,6 +34,7 @@ public class ConfiguracionSeguridad {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/usuarios", "/usuarios/**").permitAll()
+                        .requestMatchers("/internal/v1/auth/introspect").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtCustomFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
