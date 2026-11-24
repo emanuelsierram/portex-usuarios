@@ -5,6 +5,7 @@ import com.portex.usuarios.dominio.servicio.ServicioGestionarUsuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +43,18 @@ public class UsuarioControlador {
                                            @PathVariable String rol) {
         servicioGestionarUsuario.asignarRol(usuario, rol);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{usuario}/roles/{rol}")
+    public ResponseEntity<Void> eliminarRol(@PathVariable String usuario,
+                                            @PathVariable String rol) {
+        servicioGestionarUsuario.eliminarRol(usuario, rol);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{usuario}")
+    public ResponseEntity<Void> eliminar(@PathVariable String usuario) {
+        servicioGestionarUsuario.eliminar(usuario);
+        return ResponseEntity.noContent().build();
     }
 }

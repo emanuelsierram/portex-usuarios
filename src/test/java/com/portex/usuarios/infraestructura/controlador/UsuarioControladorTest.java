@@ -45,4 +45,28 @@ class UsuarioControladorTest {
         verify(servicio).asignarRol("3010000000", "USER");
         assertEquals(HttpStatus.CREATED, respuesta.getStatusCode());
     }
+
+    @Test
+    void eliminarRolRetornaSinContenido() {
+        ServicioGestionarUsuario servicio = mock(ServicioGestionarUsuario.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+        UsuarioControlador controlador = new UsuarioControlador(servicio, passwordEncoder);
+
+        ResponseEntity<Void> respuesta = controlador.eliminarRol("3010000000", "USER");
+
+        verify(servicio).eliminarRol("3010000000", "USER");
+        assertEquals(HttpStatus.NO_CONTENT, respuesta.getStatusCode());
+    }
+
+    @Test
+    void eliminarUsuarioRetornaSinContenido() {
+        ServicioGestionarUsuario servicio = mock(ServicioGestionarUsuario.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+        UsuarioControlador controlador = new UsuarioControlador(servicio, passwordEncoder);
+
+        ResponseEntity<Void> respuesta = controlador.eliminar("3010000000");
+
+        verify(servicio).eliminar("3010000000");
+        assertEquals(HttpStatus.NO_CONTENT, respuesta.getStatusCode());
+    }
 }

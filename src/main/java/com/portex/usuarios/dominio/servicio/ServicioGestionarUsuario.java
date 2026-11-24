@@ -18,4 +18,12 @@ public class ServicioGestionarUsuario {
     public void asignarRol(String usuario, String rol) {
         repositorioUsuario.asignarRol(usuario, rol);
     }
+
+    public void eliminarRol(String usuario, String rol) {
+        repositorioUsuario.eliminarRol(usuario, rol);
+    }
+
+    public void eliminar(String usuario) {
+        repositorioUsuario.eliminar(usuario);
+    }
 }

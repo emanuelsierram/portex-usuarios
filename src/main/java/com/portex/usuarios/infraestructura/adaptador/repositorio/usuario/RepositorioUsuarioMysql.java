@@ -13,6 +13,9 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
 
     private static final String SQL_CREAR = "INSERT INTO portafolio.users (usuario, contrasena, email, bloqueado, desabilitado) VALUES (:usuario, :contrasena, :email, 0, 0)";
     private static final String SQL_ASIGNAR_ROL = "INSERT INTO portafolio.user_role (usuario, rol, fecha_creacion) VALUES (:usuario, :rol, :fecha)";
+    private static final String SQL_ELIMINAR_ROL = "DELETE FROM portafolio.user_role WHERE usuario = :usuario AND rol = :rol";
+    private static final String SQL_ELIMINAR_ROLES_USUARIO = "DELETE FROM portafolio.user_role WHERE usuario = :usuario";
+    private static final String SQL_ELIMINAR_USUARIO = "DELETE FROM portafolio.users WHERE usuario = :usuario";
 
     private final CustomNamedParameterJdbcTemplate jdbc;
 
@@ -32,5 +35,20 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
                 .addValue("rol", rol)
                 .addValue("fecha", LocalDateTime.now());
         jdbc.getNamedParameterJdbcTemplate().update(SQL_ASIGNAR_ROL, params);
+    }
+
+    @Override
+    public void eliminarRol(String usuario, String rol) {
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("usuario", usuario)
+                .addValue("rol", rol);
+        jdbc.getNamedParameterJdbcTemplate().update(SQL_ELIMINAR_ROL, params);
+    }
+
+    @Override
+    public void eliminar(String usuario) {
+        MapSqlParameterSource params = new MapSqlParameterSource("usuario", usuario);
+        jdbc.getNamedParameterJdbcTemplate().update(SQL_ELIMINAR_ROLES_USUARIO, params);
+        jdbc.getNamedParameterJdbcTemplate().update(SQL_ELIMINAR_USUARIO, params);
     }
 }

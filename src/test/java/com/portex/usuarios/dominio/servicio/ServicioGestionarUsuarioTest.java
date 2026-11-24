@@ -29,4 +29,24 @@ class ServicioGestionarUsuarioTest {
 
         verify(repositorioUsuario).asignarRol("3010000000", "USER");
     }
+
+    @Test
+    void eliminarRolDelegaEnRepositorio() {
+        RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
+        ServicioGestionarUsuario servicio = new ServicioGestionarUsuario(repositorioUsuario);
+
+        servicio.eliminarRol("3010000000", "USER");
+
+        verify(repositorioUsuario).eliminarRol("3010000000", "USER");
+    }
+
+    @Test
+    void eliminarUsuarioDelegaEnRepositorio() {
+        RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
+        ServicioGestionarUsuario servicio = new ServicioGestionarUsuario(repositorioUsuario);
+
+        servicio.eliminar("3010000000");
+
+        verify(repositorioUsuario).eliminar("3010000000");
+    }
 }
